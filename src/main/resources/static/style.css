@@ -9,6 +9,12 @@ h1
     font-size: 3em;
     text-align: center;
 }
+h2
+{
+    font-size: 2em;
+    text-align: center;
+    padding-top: 4em;
+}
 
 ul
 {
@@ -30,4 +36,22 @@ ul li
 {
     position: absolute;
     bottom: 0px;
+}
+
+.info-block
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.info-block div
+{
+    width: 100%;
+}
+
+.info-block .date-location
+{
+    text-align: right;
 }
