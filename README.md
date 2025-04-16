@@ -28,6 +28,7 @@ En webbapplikation för den påhittade konsthallen **Tornedalens Konsthall**. Ap
 ## Guide
 
 - **application.properties** - src/main/resources/application.properties
+
 spring.application.name=Tornedalen-Konsthall
 
 spring.jpa.properties.hibernate.default_schema=Tornedalen
