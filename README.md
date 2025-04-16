@@ -36,7 +36,11 @@ spring.jpa.properties.hibernate.default_schema=Tornedalen
 spring.jpa.hibernate.ddl-auto=validate
 
 spring.datasource.url=jdbc:mysql://**databaslänk**:3306/Tornedalen
+
 spring.datasource.username=**username**
+
 spring.datasource.password=**password**
+
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
 spring.jpa.show-sql: true
