@@ -1,0 +1,56 @@
+/* Sets the layout for the page*/
+body
+{
+  font-family: Arial, sans-serif;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+/* Central card for login/register */
+.login-container
+{
+  text-align: center;
+  width: 300px;
+}
+/* Logo */
+.logo
+{
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+/* Field for button */
+.login-form input
+{
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background: #e0e0e0;
+  border: none;
+  font-size: 14px;
+}
+
+.login-form button
+{
+  width: 100%;
+  padding: 10px;
+  background: #FFD836;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+/* Text and link at the bottom */
+.bottom-text
+{
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.bottom-text .register-link
+{
+  color: #FFD836;
+  text-decoration: none;
+}
