@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.*; //NYTT
+import java.util.*; //NYTT
+
 import javax.sql.DataSource;
-import java.sql.*;
 
 /**
  * This class runs SQL-Queries
@@ -46,4 +48,47 @@ public class SQL {
             }
         }
     }
+
+    //Hämta alla utställningar från databasen
+    public List<Map<String, Object>> fetchAllExhibitions ()
+    {
+        String query = "SELECT * FROM exhibitions";
+
+        //Skapar en tom lista som fylls med alla utställningar
+        List<Map<String, Object>> exhibitions = new ArrayList<>();
+
+        //Försöker ansluta till databasen och köra SQL-satsen
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery())
+        {
+            // Lopar igenom varje rad i resultatet (en rad lika med en utställning i databasen)
+            while (rs.next())
+            {
+                // Skapar en karta där varje kollumnnamn är en nyckel och varje cell ett värde
+                Map<String, Object> exhibition = new HashMap<>();
+
+                //Lägger till alla kolumner vi vill hämta från DB
+                exhibition.put("exhibitionID", rs.getInt("exhibitionID"));
+                exhibition.put("name", rs.getString("name"));
+                exhibition.put("artist", rs.getString("artist"));
+                exhibition.put("startDate", rs.getDate("startDate"));
+                exhibition.put("endDate", rs.getDate("endDate"));
+                exhibition.put("description", rs.getString("description"));
+                exhibition.put("active", rs.getBoolean("active"));
+                exhibition.put("imageURL", rs.getString("imageURL"));
+
+                //Lägger till de funna utställningarna i listan
+                exhibitions.add(exhibition);
+
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return exhibitions;
+
+    }
+
 }
