@@ -12,7 +12,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
   
     if (response.ok) {
       alert("Registreringen lyckades!");
-      window.location.href = "home.html";
+      window.location.href = "home";
     } else {
       const text = await response.text();
       alert("Registrering misslyckades: " + text);

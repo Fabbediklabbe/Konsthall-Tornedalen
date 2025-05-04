@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konsthall Tornedalen</title>
-    <link rel="stylesheet" href="/css/exhibitions.css">
+    <link rel="stylesheet" href="../css/exhibitions.css">
 </head>
 
 <body>
@@ -14,17 +14,17 @@
 
 <!-- LOGOTYP -->
 <header class="header-logo">
-    <a href="home.html">
-        <img src="/images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
+    <a href="/home">
+        <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
     </a>
 </header>
 
 <!-- MENY MED KNAPPAR -->
 <nav class="menu">
-    <a href="exhibitions.html" class="menu-button">Utställningar</a>
-    <button class="menu-button">Ta dig hit</button>
-    <button class="menu-button">Mina Sidor</button>
-    <a href="login.html" class="menu-button logout-button">Logga ut</a>
+    <a href="exhibitions" class="menu-button" th:text="#{home.exhibitions}">Utställningar</a>
+    <button class="menu-button" th:text="#{home.findUs}">Ta dig hit</button>
+    <button class="menu-button" th:text="#{home.myPages}">Mina Sidor</button>
+    <a href="/login" class="menu-button logout-button" th:text="#{signOut}">Logga ut</a>
 </nav>
 
 <h1>Aktuella Utställningar</h1>
@@ -37,7 +37,7 @@
     <!-- Här lägger vi gamla utställningar -->
 </div>
 
-<script src="scripts/exhibitions.js"></script>
+<script src="../scripts/exhibitions.js"></script>
 
 </body>
 </html>

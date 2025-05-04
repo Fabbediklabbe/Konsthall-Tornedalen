@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
         if (response.ok) {
           // Inloggning lyckades
-          window.location.href = "home.html";
+          window.location.href = "home";
         } else {
           const errorMsg = await response.text();
           alert("Inloggning misslyckades: " + errorMsg);
