@@ -1,11 +1,15 @@
 package com.grupp16.Tornedalen.Konsthall;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final SQL sql;
 
@@ -16,14 +20,14 @@ public class UserController {
     // Registrera ny användare
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
-    System.out.println("Mottog registreringsförsök för: " + user.getEmail());
+        logger.info("Received registration for: {}", user.getEmail());
     try {
         sql.registerUser(user);
-        System.out.println("Registrerad i databasen");
-        return ResponseEntity.ok("Registrering lyckades!");
+        logger.info("Registration made for: {}", user.getEmail());
+        return ResponseEntity.ok("Registration succesful!");
     } catch (Exception e) {
-        System.out.println("Registrering misslyckades: " + e.getMessage());
-        return ResponseEntity.badRequest().body("Fel: " + e.getMessage());
+        logger.error("Registration failed due to {}: {}", user.getEmail(), e.getMessage());
+        return ResponseEntity.badRequest().body("Error: " + e.getMessage());
     }
 }
 

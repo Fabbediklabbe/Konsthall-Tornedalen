@@ -3,49 +3,44 @@ package com.grupp16.Tornedalen.Konsthall.security;
 import com.grupp16.Tornedalen.Konsthall.SQL;
 import com.grupp16.Tornedalen.Konsthall.User;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final SQL sql;
-    private final PasswordEncoder passwordEncoder;
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
-    @Autowired
-    public CustomUserDetailsService(SQL sql, PasswordEncoder passwordEncoder) {
+    private final SQL sql;
+
+    public CustomUserDetailsService(SQL sql) {
         this.sql = sql;
-        this.passwordEncoder = passwordEncoder;
-        System.out.println("✅ CustomUserDetailsService skapad");
+        logger.info("CustomUserDetailsService created");
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        System.out.println("🔍 Försöker hitta användare med e-post: " + email);
+        logger.info("Trying to find user with email: {}", email);
         try {
             User user = sql.getUserByEmail(email);
             if (user == null) {
-                System.out.println("❌ Ingen användare hittades");
+                logger.warn("No user found");
                 throw new UsernameNotFoundException("User not found with email: " + email);
             }
 
-            System.out.println("✅ Användare hittad:");
-            System.out.println("   E-post: " + user.getEmail());
-            System.out.println("   Hashat lösenord: " + user.getPassword());
-
-            // 🔐 TEST – kan tas bort senare
-            String exempelLösenord = "test123";
-            boolean match = passwordEncoder.matches(exempelLösenord, user.getPassword());
-            System.out.println("🔐 Testar lösenord \"" + exempelLösenord + "\": matchar hash? " + match);
+            logger.info("   User found:");
+            logger.info("   Email: {}", user.getEmail());
+            logger.info("   Hashed password: {}", user.getPassword());
 
             return new CustomUserDetails(user);
         } catch (SQLException e) {
-            System.out.println("🚨 SQL-fel: " + e.getMessage());
-            throw new UsernameNotFoundException("Database error: " + e.getMessage());
+            logger.error("SQL-error when fetching user with email: {}", email, e);
+            throw new UsernameNotFoundException("Could not fetch user with email: " + email, e);
         }
     }
 }
