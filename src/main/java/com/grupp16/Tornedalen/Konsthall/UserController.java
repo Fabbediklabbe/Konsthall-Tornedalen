@@ -1,11 +1,15 @@
 package com.grupp16.Tornedalen.Konsthall;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final SQL sql;
 
@@ -16,27 +20,15 @@ public class UserController {
     // Registrera ny användare
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
-        try {
-            sql.registerUser(user);
-            return ResponseEntity.ok("Registrering lyckades!");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Registrering misslyckades: " + e.getMessage());
-        }
+        logger.info("Received registration for: {}", user.getEmail());
+    try {
+        sql.registerUser(user);
+        logger.info("Registration made for: {}", user.getEmail());
+        return ResponseEntity.ok("Registration succesful!");
+    } catch (Exception e) {
+        logger.error("Registration failed due to {}: {}", user.getEmail(), e.getMessage());
+        return ResponseEntity.badRequest().body("Error: " + e.getMessage());
     }
+}
 
-    // Logga in användare
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        try {
-            User foundUser = sql.getUserByEmail(user.getEmail());
-
-            if (foundUser != null && foundUser.getPassword().equals(user.getPassword())) {
-                return ResponseEntity.ok("Inloggning lyckades!");
-            } else {
-                return ResponseEntity.status(401).body("Fel e-post eller lösenord.");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Ett fel uppstod vid inloggning: " + e.getMessage());
-        }
-    }
 }

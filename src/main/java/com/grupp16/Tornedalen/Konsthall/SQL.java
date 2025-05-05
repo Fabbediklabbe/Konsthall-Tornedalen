@@ -1,33 +1,31 @@
 package com.grupp16.Tornedalen.Konsthall;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.sql.*; //NYTT
-import java.util.*; //NYTT
-
 import javax.sql.DataSource;
-
-/**
- * This class runs SQL-Queries
- * It is a @Component so that Spring Boot can inject where it has to
- */
+import java.sql.*;
+import java.util.*;
 
 @Component
 public class SQL {
 
     private final JdbcTemplate jdbc;
     private final DataSource dataSource;
+    private final PasswordEncoder passwordEncoder;
 
-    public SQL(JdbcTemplate jdbc, DataSource dataSource) {
+    public SQL(JdbcTemplate jdbc, DataSource dataSource, PasswordEncoder passwordEncoder) {
         this.jdbc = jdbc;
         this.dataSource = dataSource;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    // Registrera ny användare i databasen
+    // Registrera ny användare i databasen (med hashat lösenord)
     public void registerUser(User user) {
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
         String sql = "INSERT INTO users (name, lastName, email, password) VALUES (?,?,?,?)";
-        jdbc.update(sql, user.getName(), user.getLastName(), user.getEmail(), user.getPassword());
+        jdbc.update(sql, user.getName(), user.getLastName(), user.getEmail(), hashedPassword);
     }
 
     // Hämta användare genom e-post (för inloggning)
@@ -50,26 +48,17 @@ public class SQL {
         }
     }
 
-    //Hämta alla utställningar från databasen
-    public List<Map<String, Object>> fetchAllExhibitions ()
-    {
+    // Hämta alla utställningar från databasen
+    public List<Map<String, Object>> fetchAllExhibitions() {
         String query = "SELECT * FROM exhibitions";
-
-        //Skapar en tom lista som fylls med alla utställningar
         List<Map<String, Object>> exhibitions = new ArrayList<>();
 
-        //Försöker ansluta till databasen och köra SQL-satsen
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery())
-        {
-            // Lopar igenom varje rad i resultatet (en rad lika med en utställning i databasen)
-            while (rs.next())
-            {
-                // Skapar en karta där varje kollumnnamn är en nyckel och varje cell ett värde
-                Map<String, Object> exhibition = new HashMap<>();
+             ResultSet rs = stmt.executeQuery()) {
 
-                //Lägger till alla kolumner vi vill hämta från DB
+            while (rs.next()) {
+                Map<String, Object> exhibition = new HashMap<>();
                 exhibition.put("exhibitionID", rs.getInt("exhibitionID"));
                 exhibition.put("name", rs.getString("name"));
                 exhibition.put("artist", rs.getString("artist"));
@@ -78,18 +67,13 @@ public class SQL {
                 exhibition.put("description", rs.getString("description"));
                 exhibition.put("active", rs.getBoolean("active"));
                 exhibition.put("imageURL", rs.getString("imageURL"));
-
-                //Lägger till de funna utställningarna i listan
                 exhibitions.add(exhibition);
-
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // eller logga snyggare
         }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+
         return exhibitions;
-
     }
-
 }
