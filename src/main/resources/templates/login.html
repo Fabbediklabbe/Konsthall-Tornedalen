@@ -15,8 +15,8 @@
     <img src="../images/logo.png" alt="Tornedalen logo" class="logo">
 
     <!-- Form to Login -->
-    <form class="login-form" id="loginForm">
-        <input type="email" name="email" placeholder="Email" required>
+    <form class="login-form" method="post" action="/login">
+        <input type="text" name="username" placeholder="Email" required>
         <input type="password" name="password" th:placeholder="#{password}" required>
         <button type="submit" th:text="#{login.button}">Logga in</button>
     </form>
@@ -30,8 +30,6 @@
     <!-- Språkval -->
     <div th:replace="~{fragments/language-selector :: languageSelector}"></div>
 </div>
-
-<script src="../scripts/login.js"></script>
 
 </body>
 </html>
