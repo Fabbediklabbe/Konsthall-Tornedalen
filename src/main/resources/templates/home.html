@@ -22,10 +22,45 @@
 <!-- MENY MED KNAPPAR -->
 <nav class="menu">
     <a href="/exhibitions" class="menu-button" th:text="#{home.exhibitions}">Utställningar</a>
-    <button class="menu-button" th:text="#{home.findUs}">Ta dig hit</button>
-    <button class="menu-button" th:text="#{home.myPages}">Mina Sidor</button>
+    <a href="/forum" class="menu-button" th:text="#{home.forum}">Forum</a>
+    <a href="/mypages" class="menu-button" th:text="#{home.myPages}">Mina sidor</a>
     <a href="/login" class="menu-button logout-button" th:text="#{signOut}">Logga ut</a>
 </nav>
+
+
+<!-- INTROTEXT -->
+<section class="intro-text">
+    <div class="intro-content">
+        <h2 th:text="#{home.intro.header}">Välkommen till Konsthall Tornedalen</h2>
+        <p th:text="#{home.intro.p1}">Det här är en interaktiv webbapplikation för Konsthall Tornedalen.</p>
+        <p th:text="#{home.intro.p2}">I denna webbapplikation kan du se vilken utställning som är aktuell just nu och även titta tillbaka på tidigare utställningar.</p>
+        <p th:text="#{home.intro.p3}">Du kan också interagera med andra konstälskare i vårt forum - skriv kommentarer och dela dina tankar om utställningarna!</p>
+
+    </div>
+</section>
+
+<!-- BILDSPPEL -->
+<section class="slideshow-container">
+    <div class="slide fade active"><img src="/images/skolbarn.png" alt="Skolbarn"></div>
+    <div class="slide fade"><img src="/images/samer.png" alt="Samer"></div>
+    <div class="slide fade"><img src="/images/torneälv.png" alt="Torneälv"></div>
+    <div class="slide fade"><img src="/images/tornedalennorrsken.png" alt="Tornedalen"></div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</section>
+
+
+<!-- Prickar längst ner -->
+<div class="dots-container">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+</div>
+
+<!-- Extern JavaScript för bildspelet -->
+<script src="../scripts/slideshow.js"></script>
 
 </body>
 </html>

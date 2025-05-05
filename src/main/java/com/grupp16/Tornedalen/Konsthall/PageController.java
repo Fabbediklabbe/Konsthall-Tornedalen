@@ -25,4 +25,15 @@ public class PageController {
     public String showExhibitions() {
         return "exhibitions";
     }
+
+    // NEW
+    @GetMapping("/forum")
+    public String showForum() {
+        return "forum";
+    }
+    // NEW
+    @GetMapping("/mypages")
+    public String showMyPages() {
+        return "mypages";
+    }
 }
