@@ -1,5 +1,6 @@
 package com.grupp16.Tornedalen.Konsthall;
 
+import org.springframework.lang.NonNull;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,7 @@ public class LocaleConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(@NonNull InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
 

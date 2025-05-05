@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <body>
-    <div th:fragment="languageSelector">
-      <form method="get" action="">
-        <select name="lang" onchange="this.form.submit()">
-          <option value="sv" th:selected="${#locale.language == 'sv'}">Swedish</option>
-          <option value="en" th:selected="${#locale.language == 'en'}">English</option>
-          <option value="fi" th:selected="${#locale.language == 'fi'}">Suomi</option>
-          <option value="se" th:selected="${#locale.language == 'se'}">Sami</option>
-        </select>
-      </form>
-    </div>
-  </body>
-</html>
+<div th:fragment="languageSelector">
+  <form method="get" action="">
+    <select name="lang" onchange="this.form.submit()">
+      <option value="sv" th:selected="${#locale.language == 'sv'}">Swedish</option>
+      <option value="en" th:selected="${#locale.language == 'en'}">English</option>
+      <option value="fi" th:selected="${#locale.language == 'fi'}">Suomi</option>
+      <option value="se" th:selected="${#locale.language == 'se'}">Sami</option>
+    </select>
+  </form>
+</div>

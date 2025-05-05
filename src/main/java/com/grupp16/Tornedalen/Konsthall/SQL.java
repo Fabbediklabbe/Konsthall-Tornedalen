@@ -1,6 +1,5 @@
 package com.grupp16.Tornedalen.Konsthall;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +16,13 @@ import javax.sql.DataSource;
 @Component
 public class SQL {
 
-    @Autowired
-    private JdbcTemplate jdbc;
+    private final JdbcTemplate jdbc;
+    private final DataSource dataSource;
 
-    @Autowired
-    private DataSource dataSource;
+    public SQL(JdbcTemplate jdbc, DataSource dataSource) {
+        this.jdbc = jdbc;
+        this.dataSource = dataSource;
+    }
 
     // Registrera ny användare i databasen
     public void registerUser(User user) {

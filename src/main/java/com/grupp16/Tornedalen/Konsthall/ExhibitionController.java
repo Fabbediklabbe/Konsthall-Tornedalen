@@ -1,6 +1,5 @@
 package com.grupp16.Tornedalen.Konsthall;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +17,11 @@ import java.util.Map;
 
 public class ExhibitionController
 {
-    @Autowired
-    private SQL sql;
+    private final SQL sql;
+
+    public ExhibitionController(SQL sql) {
+        this.sql = sql;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Map<String, Object>>> getAllExhibitions ()

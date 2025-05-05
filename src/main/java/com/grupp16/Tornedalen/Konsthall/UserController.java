@@ -1,6 +1,5 @@
 package com.grupp16.Tornedalen.Konsthall;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -8,8 +7,11 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private SQL sql; // Här injiceras vår SQL-klass automatiskt
+    private final SQL sql;
+
+    public UserController(SQL sql) {
+        this.sql = sql;
+    }
 
     // Registrera ny användare
     @PostMapping("/register")
