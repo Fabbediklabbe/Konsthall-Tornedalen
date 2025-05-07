@@ -41,4 +41,30 @@ public class ThreadController {
             return ResponseEntity.status(500).body("Kunde inte skapa tråd: " + e.getMessage());
         }
     }
+
+    // Hanterar GET-förfrågningar till /api/threads
+    // Returnerar en specifik tråd samt tillhörande utställning baserat på trådens ID
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getThreadWithExhibition(@PathVariable int id)
+    {
+        //Hämtar tråden från databasen via dess ID
+        ThreadPost thread = sql.getThreadById(id);
+
+        //Om tråden inte finns, returnera 404 Not Found
+        if (thread == null) return ResponseEntity.notFound().build();
+
+        // Hämta utställningen som tråden är kopplad till, baserat på trådens exhibitionName
+        var exhibition = sql.fetchExhibitionsByName(thread.getExhibitionName());
+
+        //Skapa ett svar som kombinerar trådinformationen och utställningsinformationen
+        var response = new java.util.HashMap<String, Object>();
+
+        //Lägg till tråden i svaret
+        response.put("thread", thread);
+        //Lägg till Utställningen i svaret
+        response.put("exhibition", exhibition);
+
+        //Skickar tillbaka svaret som JSON med HTTP status 200 OK
+        return ResponseEntity.ok(response);
+    }
 } 

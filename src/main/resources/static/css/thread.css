@@ -175,3 +175,9 @@ body {
 .comment-section button:hover {
   background-color: #e6bd00;
 }
+
+#exhibition-info img {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}

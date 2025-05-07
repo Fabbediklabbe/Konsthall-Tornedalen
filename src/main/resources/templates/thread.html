@@ -18,11 +18,12 @@
         <nav class="menu">
             <a href="/exhibitions" class="menu-button" th:text="#{home.exhibitions}">Utställningar</a>
             <a href="/forum" class="menu-button" th:text="#{home.forum}">Forum</a>
-            <a href="/mypages" class="menu-button" th:text="#{home.myPages}">Mina sidor</a>
+            <a href="/mypages" class="menu-button" th:text="#{home.myPages}">Mina Sidor</a>
             <a href="/logout" class="menu-button logout-button" th:text="#{signOut}">Logga ut</a>
         </nav>
 
-        <main class="thread-container">
+        <main class="thread-container" th:attr="data-thread-id=${thread.threadID}">
+            <div id="exhibition-info" style="float: right; width: 250px; margin-left: 20px;"></div>
             <p><strong>Skapad av:</strong> <span th:text="${thread.userFirstName + ' ' + thread.userLastName}"></span></p>
             <h1 th:text="${thread.title}">Trådtitel</h1>
             <p><strong>Utställning:</strong> <span th:text="${thread.exhibitionName}"></span></p>
@@ -51,6 +52,6 @@
                 </form>
             </section>
         </main>
-
+        <script src="/scripts/thread.js"></script>
     </body>
 </html>

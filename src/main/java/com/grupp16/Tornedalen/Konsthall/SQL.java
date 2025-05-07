@@ -116,7 +116,6 @@ public class SQL {
 
     }
 
-
     public List<ThreadPost> getAllThreads() {
         String query = """
             SELECT t.*, u.name AS userFirstName, u.lastName AS userLastName, e.name AS exhibitionName
@@ -238,6 +237,40 @@ public class SQL {
     public void saveComment(int userID, int threadID, String comment) {
         String sql = "INSERT INTO comments (userID, threadID, comment, createdAt) VALUES (?, ?, ?, ?)";
         jdbc.update(sql, userID, threadID, comment, Timestamp.valueOf(LocalDateTime.now()));
+    }
+
+    //Hämtar utställning baserat på Namn
+    public Map<String, Object> fetchExhibitionsByName(String name)
+    {
+        String query = "SELECT exhibitionID, name, artist, startDate, endDate, description, active, imageURL FROM exhibitions WHERE name = ?";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query))
+        {
+            stmt.setString(1, name);
+
+            try (ResultSet rs = stmt.executeQuery())
+            {
+                if (rs.next())
+                {
+                    Map<String, Object> exhibition = new HashMap<>();
+                    exhibition.put(EXHIBITION_ID, rs.getInt(EXHIBITION_ID));
+                    exhibition.put("name", rs.getString("name"));
+                    exhibition.put("artist", rs.getString("artist"));
+                    exhibition.put("startDate", rs.getDate("startDate"));
+                    exhibition.put("endDate", rs.getDate("endDate"));
+                    exhibition.put("description", rs.getString("description"));
+                    exhibition.put("active", rs.getBoolean("active"));
+                    exhibition.put("imageURL", rs.getString("imageURL"));
+                    return exhibition;
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
