@@ -9,6 +9,8 @@ public class ThreadPost {
     private String title;
     private String content;
     private String exhibitionName;
+    private String userFirstName;
+    private String userLastName;
     private LocalDateTime createdAt;
 
     // Getters
@@ -19,6 +21,8 @@ public class ThreadPost {
     public String getContent() { return content; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public String getExhibitionName() { return exhibitionName; }
+    public String getUserFirstName() { return userFirstName; }
+    public String getUserLastName() { return userLastName; }
 
     // Setters
     public void setThreadID(int threadID) { this.threadID = threadID; }
@@ -28,4 +32,6 @@ public class ThreadPost {
     public void setContent(String content) { this.content = content; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setExhibitionName(String exhibitionName) { this.exhibitionName = exhibitionName; }
+    public void setUserFirstName(String userFirstName) { this.userFirstName = userFirstName; }
+    public void setUserLastName(String userLastName) { this.userLastName = userLastName; }
 }

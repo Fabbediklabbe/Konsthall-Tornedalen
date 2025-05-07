@@ -39,6 +39,7 @@
         <table class="thread-table">
             <thead>
                 <tr>
+                    <th>Användare</th>
                     <th>Titel</th>
                     <th>Utställning</th>
                     <th>Skapad</th>
@@ -46,6 +47,7 @@
             </thead>
             <tbody>
                 <tr th:each="thread : ${threads}">
+                    <td th:text="${thread.userFirstName + ' ' + thread.userLastName}">Förnamn Efternamn</td>
                     <td>
                         <a th:href="@{'/forum/' + ${thread.threadID}}" th:text="${thread.title}">Trådtitel</a>
                     </td>

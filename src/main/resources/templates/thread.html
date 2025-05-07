@@ -23,9 +23,11 @@
         </nav>
 
         <main class="thread-container">
+            <p><strong>Skapad av:</strong> <span th:text="${thread.userFirstName + ' ' + thread.userLastName}"></span></p>
             <h1 th:text="${thread.title}">Trådtitel</h1>
             <p><strong>Utställning:</strong> <span th:text="${thread.exhibitionName}"></span></p>
             <p><strong>Skapad:</strong> <span th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</span></p>
+
             <p th:text="${thread.content}">Innehållet i tråden...</p>
 
             <section class="comment-list">

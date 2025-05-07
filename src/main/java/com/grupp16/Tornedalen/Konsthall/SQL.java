@@ -88,8 +88,9 @@ public class SQL {
 
     public List<ThreadPost> getAllThreads() {
         String query = """
-            SELECT t.*, e.name AS exhibitionName
+            SELECT t.*, u.name AS userFirstName, u.lastName AS userLastName, e.name AS exhibitionName
             FROM threads t
+            JOIN users u ON t.userID = u.userID
             JOIN exhibitions e ON t.exhibitionID = e.exhibitionID
             ORDER BY t.createdAt DESC
         """;
@@ -104,6 +105,8 @@ public class SQL {
                 ThreadPost thread = new ThreadPost();
                 thread.setThreadID(rs.getInt("threadID"));
                 thread.setUserID(rs.getInt(USER_ID));
+                thread.setUserFirstName(rs.getString("userFirstName"));
+                thread.setUserLastName(rs.getString("userLastName"));
                 thread.setExhibitionID(rs.getInt(EXHIBITION_ID));
                 thread.setTitle(rs.getString("title"));
                 thread.setContent(rs.getString("content"));
@@ -135,8 +138,9 @@ public class SQL {
 
     public ThreadPost getThreadById(int threadID) {
         String query = """
-            SELECT t.*, e.name AS exhibitionName
+            SELECT t.*, u.name AS userFirstName, u.lastName AS userLastName, e.name AS exhibitionName
             FROM threads t
+            JOIN users u ON t.userID = u.userID
             JOIN exhibitions e ON t.exhibitionID = e.exhibitionID
             WHERE t.threadID = ?
             """;
@@ -151,6 +155,8 @@ public class SQL {
                 ThreadPost thread = new ThreadPost();
                 thread.setThreadID(rs.getInt("threadID"));
                 thread.setUserID(rs.getInt(USER_ID));
+                thread.setUserFirstName(rs.getString("userFirstName"));
+                thread.setUserLastName(rs.getString("userLastName"));
                 thread.setExhibitionID(rs.getInt(EXHIBITION_ID));
                 thread.setTitle(rs.getString("title"));
                 thread.setContent(rs.getString("content"));
@@ -175,7 +181,7 @@ public class SQL {
             JOIN users u ON c.userID = u.userID
             WHERE c.threadID = ? 
             ORDER BY c.createdAt ASC
-        """;
+            """;
     
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
