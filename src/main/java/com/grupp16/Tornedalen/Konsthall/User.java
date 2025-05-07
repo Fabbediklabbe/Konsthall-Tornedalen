@@ -10,6 +10,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private int userID;
     private String name;
     private String lastName;
     private String email;
@@ -17,6 +18,9 @@ public class User implements Serializable {
  
  
     // Getters
+    public int getUserID(){
+        return userID;
+    }
     public String getName ()
     {
         return name;
@@ -35,6 +39,10 @@ public class User implements Serializable {
     }
  
     // Setters
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
+    }
     public void setName(String name)
     {
         this.name = name;

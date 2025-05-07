@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.*;
@@ -30,7 +31,7 @@ public class SQL {
 
     // Hämta användare genom e-post (för inloggning)
     public User getUserByEmail(String email) throws SQLException {
-        String query = "SELECT email, password FROM users WHERE email = ?";
+        String query = "SELECT userID, email, password FROM users WHERE email = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
@@ -39,6 +40,7 @@ public class SQL {
 
             if (rs.next()) {
                 User user = new User();
+                user.setUserID(rs.getInt("userID"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 return user;
@@ -76,4 +78,122 @@ public class SQL {
 
         return exhibitions;
     }
+
+    public List<ThreadPost> getAllThreads() {
+        String query = """
+            SELECT t.*, e.name AS exhibitionName
+            FROM threads t
+            JOIN exhibitions e ON t.exhibitionID = e.exhibitionID
+            ORDER BY t.createdAt DESC
+        """;
+    
+        List<ThreadPost> threads = new ArrayList<>();
+    
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+    
+            while (rs.next()) {
+                ThreadPost thread = new ThreadPost();
+                thread.setThreadID(rs.getInt("threadID"));
+                thread.setUserID(rs.getInt("userID"));
+                thread.setExhibitionID(rs.getInt("exhibitionID"));
+                thread.setTitle(rs.getString("title"));
+                thread.setContent(rs.getString("content"));
+                thread.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                thread.setExhibitionName(rs.getString("exhibitionName")); // ✅ nytt fält
+    
+                threads.add(thread);
+            }
+    
+        } catch (SQLException e) {
+            e.printStackTrace(); // byt ut mot logger om du vill
+        }
+    
+        return threads;
+    }
+    
+
+    public void createThread(ThreadPost thread) {
+        String sql = "INSERT INTO threads (userID, exhibitionID, title, content, createdAt) VALUES (?, ?, ?, ?, ?)";
+    
+        jdbc.update(sql,
+            thread.getUserID(),
+            thread.getExhibitionID(),
+            thread.getTitle(),
+            thread.getContent(),
+            Timestamp.valueOf(thread.getCreatedAt())
+        );
+    }
+
+    public ThreadPost getThreadById(int threadID) {
+        String query = """
+            SELECT t.*, e.name AS exhibitionName
+            FROM threads t
+            JOIN exhibitions e ON t.exhibitionID = e.exhibitionID
+            WHERE t.threadID = ?
+            """;
+    
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+    
+            stmt.setInt(1, threadID);
+            ResultSet rs = stmt.executeQuery();
+    
+            if (rs.next()) {
+                ThreadPost thread = new ThreadPost();
+                thread.setThreadID(rs.getInt("threadID"));
+                thread.setUserID(rs.getInt("userID"));
+                thread.setExhibitionID(rs.getInt("exhibitionID"));
+                thread.setTitle(rs.getString("title"));
+                thread.setContent(rs.getString("content"));
+                thread.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                thread.setExhibitionName(rs.getString("exhibitionName"));
+    
+                return thread;
+            }
+    
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Hämta kommentarer för en tråd
+    public List<Comment> getCommentsByThreadId(int threadID) {
+        List<Comment> comments = new ArrayList<>();
+        String query = """
+            SELECT u.name AS userName, c.comment, c.createdAt 
+            FROM comments c
+            JOIN users u ON c.userID = u.userID
+            WHERE c.threadID = ? 
+            ORDER BY c.createdAt ASC
+        """;
+    
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, threadID);
+            ResultSet rs = stmt.executeQuery();
+    
+            while (rs.next()) {
+                comments.add(new Comment(
+                    rs.getString("userName"),
+                    rs.getString("comment"),
+                    rs.getTimestamp("createdAt").toLocalDateTime()
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return comments;
+    }
+    
+
+    // Spara en ny kommentar till en tråd
+    public void saveComment(int userID, int threadID, String comment) {
+        String sql = "INSERT INTO comments (userID, threadID, comment, createdAt) VALUES (?, ?, ?, ?)";
+        jdbc.update(sql, userID, threadID, comment, Timestamp.valueOf(LocalDateTime.now()));
+    }
+
 }

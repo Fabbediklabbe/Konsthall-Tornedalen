@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Skapa ny tråd</title>
+        <link rel="stylesheet" href="../css/forum.css">
+    </head>
+    <body>
+
+        <div class="background-image"></div>
+
+        <header class="header-logo">
+            <a href="/home"><img src="../images/logo.png" alt="Logo" class="logo"></a>
+        </header>
+
+        <nav class="menu">
+            <a href="/exhibitions" class="menu-button">Utställningar</a>
+            <a href="/forum" class="menu-button">Forum</a>
+            <a href="/mypages" class="menu-button">Mina sidor</a>
+            <a href="/logout" class="menu-button logout-button">Logga ut</a>
+        </nav>
+
+        <main class="forum-container">
+            <h1>Skapa ny tråd</h1>
+
+            <form method="post" action="/forum/new">
+                <label>Titel:</label>
+                <input type="text" name="title" required>
+
+                <label>Innehåll:</label>
+                <textarea name="content" required></textarea>
+
+                <label>Utställning:</label>
+                <select name="exhibitionID" required>
+                    <option th:each="exhibition : ${exhibitions}"
+                            th:value="${exhibition.exhibitionID}"
+                            th:text="${exhibition.name}">
+                    </option>
+                </select>
+
+                <button type="submit">Publicera</button>
+            </form>
+        </main>
+
+    </body>
+</html>
