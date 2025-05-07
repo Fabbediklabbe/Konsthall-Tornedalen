@@ -10,6 +10,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private int userID;
     private String name;
     private String lastName;
     private String email;
