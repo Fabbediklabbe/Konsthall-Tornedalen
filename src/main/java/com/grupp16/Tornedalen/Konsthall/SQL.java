@@ -16,6 +16,10 @@ public class SQL {
     private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
 
+    private static final String USER_ID = "userID";
+    private static final String EXHIBITION_ID = "exhibitionID";
+    private static final String CREATED_AT = "createdAt";
+
     public SQL(JdbcTemplate jdbc, DataSource dataSource, PasswordEncoder passwordEncoder) {
         this.jdbc = jdbc;
         this.dataSource = dataSource;
@@ -40,7 +44,7 @@ public class SQL {
 
             if (rs.next()) {
                 User user = new User();
-                user.setUserID(rs.getInt("userID"));
+                user.setUserID(rs.getInt(USER_ID));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 return user;
@@ -52,7 +56,10 @@ public class SQL {
 
     // Hämta alla utställningar från databasen
     public List<Map<String, Object>> fetchAllExhibitions() {
-        String query = "SELECT * FROM exhibitions";
+        String query = """
+        SELECT exhibitionID, name, artist, startDate, endDate, description, active, imageURL
+        FROM exhibitions
+        """;
         List<Map<String, Object>> exhibitions = new ArrayList<>();
 
         try (Connection conn = dataSource.getConnection();
@@ -61,7 +68,7 @@ public class SQL {
 
             while (rs.next()) {
                 Map<String, Object> exhibition = new HashMap<>();
-                exhibition.put("exhibitionID", rs.getInt("exhibitionID"));
+                exhibition.put(EXHIBITION_ID, rs.getInt(EXHIBITION_ID));
                 exhibition.put("name", rs.getString("name"));
                 exhibition.put("artist", rs.getString("artist"));
                 exhibition.put("startDate", rs.getDate("startDate"));
@@ -96,12 +103,12 @@ public class SQL {
             while (rs.next()) {
                 ThreadPost thread = new ThreadPost();
                 thread.setThreadID(rs.getInt("threadID"));
-                thread.setUserID(rs.getInt("userID"));
-                thread.setExhibitionID(rs.getInt("exhibitionID"));
+                thread.setUserID(rs.getInt(USER_ID));
+                thread.setExhibitionID(rs.getInt(EXHIBITION_ID));
                 thread.setTitle(rs.getString("title"));
                 thread.setContent(rs.getString("content"));
-                thread.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
-                thread.setExhibitionName(rs.getString("exhibitionName")); // ✅ nytt fält
+                thread.setCreatedAt(rs.getTimestamp(CREATED_AT).toLocalDateTime());
+                thread.setExhibitionName(rs.getString("exhibitionName"));
     
                 threads.add(thread);
             }
@@ -143,11 +150,11 @@ public class SQL {
             if (rs.next()) {
                 ThreadPost thread = new ThreadPost();
                 thread.setThreadID(rs.getInt("threadID"));
-                thread.setUserID(rs.getInt("userID"));
-                thread.setExhibitionID(rs.getInt("exhibitionID"));
+                thread.setUserID(rs.getInt(USER_ID));
+                thread.setExhibitionID(rs.getInt(EXHIBITION_ID));
                 thread.setTitle(rs.getString("title"));
                 thread.setContent(rs.getString("content"));
-                thread.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                thread.setCreatedAt(rs.getTimestamp(CREATED_AT).toLocalDateTime());
                 thread.setExhibitionName(rs.getString("exhibitionName"));
     
                 return thread;
@@ -179,7 +186,7 @@ public class SQL {
                 comments.add(new Comment(
                     rs.getString("userName"),
                     rs.getString("comment"),
-                    rs.getTimestamp("createdAt").toLocalDateTime()
+                    rs.getTimestamp(CREATED_AT).toLocalDateTime()
                 ));
             }
         } catch (SQLException e) {

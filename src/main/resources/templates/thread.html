@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${thread.title}">Tråd</title>
-    <link rel="stylesheet" href="../css/forum.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${thread.title}">Tråd</title>
+        <link rel="stylesheet" href="../css/forum.css">
+    </head>
+    <body>
 
-<div class="background-overlay"></div>
+        <div class="background-overlay"></div>
 
-<header class="header-logo">
-    <a href="/home">
-        <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
-    </a>
-</header>
+        <header class="header-logo">
+            <a href="/home">
+                <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
+            </a>
+        </header>
 
-<nav class="menu">
-    <a href="/exhibitions" class="menu-button" th:text="#{home.exhibitions}">Utställningar</a>
-    <a href="/forum" class="menu-button" th:text="#{home.forum}">Forum</a>
-    <a href="/mypages" class="menu-button" th:text="#{home.myPages}">Mina sidor</a>
-    <a href="/logout" class="menu-button logout-button" th:text="#{signOut}">Logga ut</a>
-</nav>
+        <nav class="menu">
+            <a href="/exhibitions" class="menu-button" th:text="#{home.exhibitions}">Utställningar</a>
+            <a href="/forum" class="menu-button" th:text="#{home.forum}">Forum</a>
+            <a href="/mypages" class="menu-button" th:text="#{home.myPages}">Mina sidor</a>
+            <a href="/logout" class="menu-button logout-button" th:text="#{signOut}">Logga ut</a>
+        </nav>
 
-<main class="thread-container">
-    <h1 th:text="${thread.title}">Trådtitel</h1>
-    <p><strong>Utställning:</strong> <span th:text="${thread.exhibitionName}"></span></p>
-    <p><strong>Skapad:</strong> <span th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</span></p>
-    <p th:text="${thread.content}">Innehållet i tråden...</p>
+        <main class="thread-container">
+            <h1 th:text="${thread.title}">Trådtitel</h1>
+            <p><strong>Utställning:</strong> <span th:text="${thread.exhibitionName}"></span></p>
+            <p><strong>Skapad:</strong> <span th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</span></p>
+            <p th:text="${thread.content}">Innehållet i tråden...</p>
 
-    <section class="comment-list">
-        <h2>Kommentarer</h2>
-        <div th:if="${#lists.isEmpty(comments)}">
-            <p>Inga kommentarer än.</p>
-        </div>
-        <div th:each="comment : ${comments}" class="comment">
-            <p><strong th:text="${comment.userName}">Användare</strong> skrev:</p>
-            <p th:text="${comment.comment}">Kommentarens innehåll...</p>
-            <small th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">Tid</small>
-            <hr>
-        </div>
-    </section>
+            <section class="comment-list">
+                <h2>Kommentarer</h2>
+                <div th:if="${#lists.isEmpty(comments)}">
+                    <p>Inga kommentarer än.</p>
+                </div>
+                <div th:each="comment : ${comments}" class="comment">
+                    <p><strong th:text="${comment.userName}">Användare</strong> skrev:</p>
+                    <p th:text="${comment.comment}">Kommentarens innehåll...</p>
+                    <small th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">Tid</small>
+                    <hr>
+                </div>
+            </section>
 
-    <section class="comment-section">
-        <h2>Kommentera</h2>
-        <form method="post" th:action="@{'/forum/' + ${thread.threadID} + '/comment'}">
-            <textarea name="comment" placeholder="Skriv din kommentar..." required></textarea>
-            <button type="submit">Skicka</button>
-        </form>
-    </section>
-</main>
+            <section class="comment-section">
+                <h2>Kommentera</h2>
+                <form method="post" th:action="@{'/forum/' + ${thread.threadID} + '/comment'}">
+                    <textarea name="comment" placeholder="Skriv din kommentar..." required></textarea>
+                    <button type="submit">Skicka</button>
+                </form>
+            </section>
+        </main>
 
-</body>
+    </body>
 </html>

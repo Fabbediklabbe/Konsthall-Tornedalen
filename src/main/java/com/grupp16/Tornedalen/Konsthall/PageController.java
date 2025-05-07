@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class PageController {
 
     private final SQL sql;
+    private static final String ATTR_THREAD = "thread";
 
     public PageController(SQL sql) {
         this.sql = sql;
@@ -50,7 +51,7 @@ public class PageController {
     public String showNewThreadForm(Model model) {
         List<Map<String, Object>> exhibitions = sql.fetchAllExhibitions();
         model.addAttribute("exhibitions", exhibitions);
-        model.addAttribute("thread", new ThreadPost());
+        model.addAttribute(ATTR_THREAD, new ThreadPost());
         return "new-thread";
     }
 
@@ -72,9 +73,9 @@ public class PageController {
         ThreadPost thread = sql.getThreadById(threadID);
         if (thread == null) return "redirect:/forum";
 
-        model.addAttribute("thread", thread);
+        model.addAttribute(ATTR_THREAD, thread);
         model.addAttribute("comments", sql.getCommentsByThreadId(threadID));
-        return "thread";
+        return ATTR_THREAD;
     }
 
     @PostMapping("/forum/{id}/comment")

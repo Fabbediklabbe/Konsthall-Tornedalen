@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 public class Comment {
     private String userName;
-    private String comment;
+    private String commentText;
     private LocalDateTime createdAt;
 
     public Comment(String userName, String comment, LocalDateTime createdAt) {
         this.userName = userName;
-        this.comment = comment;
+        this.commentText = comment;
         this.createdAt = createdAt;
     }
 
@@ -19,7 +19,7 @@ public class Comment {
     }
 
     public String getComment() {
-        return comment;
+        return commentText;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -32,7 +32,7 @@ public class Comment {
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.commentText = comment;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {

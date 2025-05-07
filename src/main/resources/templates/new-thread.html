@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Skapa ny tråd</title>
@@ -24,14 +24,15 @@
             <h1>Skapa ny tråd</h1>
 
             <form method="post" action="/forum/new">
-                <label>Titel:</label>
-                <input type="text" name="title" required>
+                <label for="title">Titel:</label>
+                <input type="text" name="title" id="title" required>
 
-                <label>Innehåll:</label>
-                <textarea name="content" required></textarea>
+                <label for="content">Innehåll:</label>
+                <textarea name="content" id="content" required></textarea>
 
-                <label>Utställning:</label>
-                <select name="exhibitionID" required>
+                <label for="exhibitionID">Utställning:</label>
+                <select name="exhibitionID" id="exhibitionID" required>
+                    <option value="" disabled selected>Välj en utställning</option>
                     <option th:each="exhibition : ${exhibitions}"
                             th:value="${exhibition.exhibitionID}"
                             th:text="${exhibition.name}">
