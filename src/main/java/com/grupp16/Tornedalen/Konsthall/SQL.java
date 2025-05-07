@@ -28,9 +28,9 @@ public class SQL {
         jdbc.update(sql, user.getName(), user.getLastName(), user.getEmail(), hashedPassword);
     }
 
-    // Hämta användare genom e-post (för inloggning)
+    // Hämta användare genom e-post (FÖR INLOGGNING)
     public User getUserByEmail(String email) throws SQLException {
-        String query = "SELECT email, password FROM users WHERE email = ?";
+        String query = "SELECT userID, name, lastName, email, password FROM users WHERE email = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
@@ -39,6 +39,9 @@ public class SQL {
 
             if (rs.next()) {
                 User user = new User();
+                user.setUserID(rs.getInt("userID")); //NYTT
+                user.setName(rs.getString("name")); //NYTT
+                user.setLastName(rs.getString("lastName")); //NYTT
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 return user;
@@ -76,4 +79,33 @@ public class SQL {
 
         return exhibitions;
     }
+
+    public List<Map<String, Object>> getCommentsByUserId (int userID)
+    {
+        List<Map<String, Object>> comments = new ArrayList<>();
+        String query ="SELECT comment, createdAt FROM comments WHERE userID = ? ORDER BY createdAt DESC";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query))
+        {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                Map<String, Object> comment = new HashMap<>();
+                comment.put("comment", rs.getString("comment"));
+                comment.put("createdAt", rs.getTimestamp("createdAt"));
+                comments.add(comment);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return comments;
+
+    }
+
 }

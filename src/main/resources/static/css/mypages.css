@@ -78,3 +78,33 @@ body {
   display: inline-block;
   text-align: center;
 }
+
+.mypage-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.user-info, .user-comments {
+  margin-bottom: 30px;
+}
+
+.user-info h2, .user-comments h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.user-comments ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-comments li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}

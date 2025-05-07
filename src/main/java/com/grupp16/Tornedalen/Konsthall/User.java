@@ -14,11 +14,14 @@ public class User implements Serializable {
     private String lastName;
     private String email;
     private String password;
+    private int userID;
  
  
     // Getters
-    public String getName ()
-    {
+    public int getUserID() {
+        return userID;
+    }
+    public String getName () {
         return name;
     }
     public String getLastName()
@@ -35,6 +38,11 @@ public class User implements Serializable {
     }
  
     // Setters
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
     public void setName(String name)
     {
         this.name = name;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konsthall Tornedalen</title>
-    <link rel="stylesheet" href="../css/mypages.css">
+    <link rel="stylesheet" th:href="@{/css/mypages.css}">
 </head>
 
 <body>
@@ -27,6 +27,27 @@
     <a href="/login" class="menu-button logout-button" th:text="#{signOut}">Logga ut</a>
 </nav>
 
+<!-- HUVUDINNEHÅLL -->
+<div class="mypage-container">
+
+    <section class="user-info">
+        <h2 th:text="#{mypages.yourinfo}">Dina uppgifter</h2>
+        <p><strong th:text="#{mypages.firstname}">Förnamn:</strong> <span id="firstName"></span></p>
+        <p><strong th:text="#{mypages.lastname}">Efternamn:</strong> <span id="lastName"></span></p>
+        <p><strong th:text="#{mypages.email}">E-post:</strong> <span id="email"></span></p>
+    </section>
+
+    <section class="user-comments">
+        <h2 th:text="#{mypages.comments}">Dina kommentarer</h2>
+        <ul id="commentList">
+            <!-- Kommentarer fylls med JavaScript -->
+        </ul>
+    </section>
+
+</div> <!-- Stänger mypage-container -->
+
+<!-- JavaScript -->
+<script th:src="@{/scripts/mypages.js}"></script>
 
 </body>
 </html>
