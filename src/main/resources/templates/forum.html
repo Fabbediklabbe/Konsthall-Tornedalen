@@ -10,7 +10,7 @@
 <body>
 
     <!-- Bakgrundsöverlägg -->
-    <div class="background-image"></div>
+    <div class="background-overlay"></div>
 
     <!-- LOGOTYP -->
     <header class="header-logo">
@@ -39,21 +39,21 @@
         <table class="thread-table">
             <thead>
                 <tr>
-                    <th>Användare</th>
+                    <th>Skapad av</th>
                     <th>Titel</th>
                     <th>Utställning</th>
                     <th>Skapad</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="thread : ${threads}">
-                    <td th:text="${thread.userFirstName + ' ' + thread.userLastName}">Förnamn Efternamn</td>
-                    <td>
-                        <a th:href="@{'/forum/' + ${thread.threadID}}" th:text="${thread.title}">Trådtitel</a>
-                    </td>
-                    <td th:text="${thread.exhibitionName}">Utställning</td>
-                    <td th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</td>
-                </tr>
+            <tr th:each="thread : ${threads}"
+                th:onclick="|window.location='/forum/${thread.threadID}'|"
+                class="clickable-row">
+                <td th:text="${thread.userFirstName + ' ' + thread.userLastName}">Förnamn Efternamn</td>
+                <td th:text="${thread.title}">Trådtitel</td>
+                <td th:text="${thread.exhibitionName}">Utställning</td>
+                <td th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</td>
+            </tr>
             </tbody>
         </table>
     </div>
