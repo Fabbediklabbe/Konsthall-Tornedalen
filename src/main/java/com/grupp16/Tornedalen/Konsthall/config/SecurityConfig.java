@@ -1,4 +1,4 @@
-package com.grupp16.Tornedalen.Konsthall;
+package com.grupp16.Tornedalen.Konsthall.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

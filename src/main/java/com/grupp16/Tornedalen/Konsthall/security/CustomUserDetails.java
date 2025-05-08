@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.grupp16.Tornedalen.Konsthall.User;
+import com.grupp16.Tornedalen.Konsthall.model.User;
 
 import java.util.*;
 

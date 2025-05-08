@@ -1,7 +1,12 @@
-package com.grupp16.Tornedalen.Konsthall;
+package com.grupp16.Tornedalen.Konsthall.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import com.grupp16.Tornedalen.Konsthall.model.ThreadPost;
+import com.grupp16.Tornedalen.Konsthall.model.User;
+import com.grupp16.Tornedalen.Konsthall.service.SQL;
+
 import org.springframework.ui.Model;
 
 import java.security.Principal;

@@ -1,8 +1,12 @@
-package com.grupp16.Tornedalen.Konsthall;
+package com.grupp16.Tornedalen.Konsthall.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+
+import com.grupp16.Tornedalen.Konsthall.model.User;
+import com.grupp16.Tornedalen.Konsthall.service.SQL;
+
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.core.Authentication;

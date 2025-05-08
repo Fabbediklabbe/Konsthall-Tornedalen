@@ -1,4 +1,4 @@
-package com.grupp16.Tornedalen.Konsthall;
+package com.grupp16.Tornedalen.Konsthall.model;
 
 import java.io.Serializable;
 

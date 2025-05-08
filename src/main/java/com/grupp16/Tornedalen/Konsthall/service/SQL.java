@@ -1,8 +1,12 @@
-package com.grupp16.Tornedalen.Konsthall;
+package com.grupp16.Tornedalen.Konsthall.service;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import com.grupp16.Tornedalen.Konsthall.model.User;
+import com.grupp16.Tornedalen.Konsthall.model.ThreadPost;
+import com.grupp16.Tornedalen.Konsthall.model.Comment;
 
 import java.time.LocalDateTime;
 import javax.sql.DataSource;

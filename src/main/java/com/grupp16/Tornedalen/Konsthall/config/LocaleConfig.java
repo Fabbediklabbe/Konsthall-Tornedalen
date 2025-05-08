@@ -1,4 +1,4 @@
-package com.grupp16.Tornedalen.Konsthall;
+package com.grupp16.Tornedalen.Konsthall.config;
 
 import org.springframework.lang.NonNull;
 import org.springframework.context.MessageSource;

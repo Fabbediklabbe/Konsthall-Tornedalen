@@ -1,7 +1,7 @@
 package com.grupp16.Tornedalen.Konsthall.security;
 
-import com.grupp16.Tornedalen.Konsthall.SQL;
-import com.grupp16.Tornedalen.Konsthall.User;
+import com.grupp16.Tornedalen.Konsthall.model.User;
+import com.grupp16.Tornedalen.Konsthall.service.SQL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
