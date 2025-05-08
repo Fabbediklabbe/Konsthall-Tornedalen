@@ -64,7 +64,7 @@ Filen går att få tag på genom att kontakta mig, alternativt att du konfigurer
 spring.application.name=Tornedalen-Konsthall
 spring.jpa.properties.hibernate.default_schema=Tornedalen
 spring.jpa.hibernate.ddl-auto=validate
-spring.datasource.url=jdbc:mysql://[LÄNK TILL DIN DATABAS]:3306/Tornedalen
+spring.datasource.url=jdbc:mysql://[DATABAS HOSTNAME]:[DATABAS PORT]/Tornedalen
 spring.datasource.username=[ANVÄNDARNAMN TILL DIN DATABAS]
 spring.datasource.password=[LÖSENORD TILL DIN DATABAS]
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
