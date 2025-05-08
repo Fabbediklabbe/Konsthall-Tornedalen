@@ -19,17 +19,26 @@
 
         <main class="thread-container" th:attr="data-thread-id=${thread.threadID}">
             <div id="exhibition-info" style="float: right; width: 250px; margin-left: 20px;"></div>
-            <p><strong>Skapad av:</strong> <span th:text="${thread.userFirstName + ' ' + thread.userLastName}"></span></p>
+            <p><strong><span th:text="#{forum.createdBy}"></span>:</strong>
+                <span th:text="${thread.userFirstName + ' ' + thread.userLastName}"></span>
+            </p>
             <h1 th:text="${thread.title}">Trådtitel</h1>
-            <p><strong>Utställning:</strong> <span th:text="${thread.exhibitionName}"></span></p>
-            <p><strong>Skapad:</strong> <span th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</span></p>
+            <p>
+                <strong><span th:text="#{forum.exhibition}"></span>:</strong>
+                <span th:text="${thread.exhibitionName}"></span>
+            </p>
+              
+            <p>
+                <strong><span th:text="#{forum.dateTime}"></span>:</strong>
+                <span th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</span>
+            </p>
 
             <p th:text="${thread.content}">Innehållet i tråden...</p>
 
             <section class="comment-list">
-                <h2>Kommentarer</h2>
+                <h2 th:text="#{thread.comments}">Kommentarer</h2>
                 <div th:if="${#lists.isEmpty(comments)}">
-                    <p>Inga kommentarer än.</p>
+                    <p th:text="#{thread.noComment}">Inga kommentarer än.</p>
                 </div>
                 <div th:each="comment : ${comments}" class="comment">
                     <p><strong th:text="${comment.userName}">Användare</strong> skrev:</p>
@@ -40,10 +49,10 @@
             </section>
 
             <section class="comment-section">
-                <h2>Kommentera</h2>
+                <h2 th:text="#{thread.makeComment}">Kommentera</h2>
                 <form method="post" th:action="@{'/forum/' + ${thread.threadID} + '/comment'}">
-                    <textarea name="comment" placeholder="Skriv din kommentar..." required></textarea>
-                    <button type="submit">Skicka</button>
+                    <textarea name="comment" th:placeholder="#{thread.commentPlaceholder}" required></textarea>
+                    <button type="submit" th:text="#{forum.postThread}">Skicka</button>
                 </form>
             </section>
         </main>

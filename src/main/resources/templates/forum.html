@@ -25,19 +25,19 @@
 
     <!-- Forum-inlägg -->
     <div class="forum-container">
-        <h1>Forumtrådar</h1>
+        <h1 th:text="#{forum.header}">Forumtrådar</h1>
 
         <div class="new-thread-button-container">
-            <a href="/forum/new" class="menu-button">Skapa ny tråd</a>
+            <a href="/forum/new" class="menu-button" th:text="#{forum.createThread}">Skapa ny tråd</a>
         </div>        
 
         <table class="thread-table">
             <thead>
                 <tr>
-                    <th>Skapad av</th>
-                    <th>Titel</th>
-                    <th>Utställning</th>
-                    <th>Skapad</th>
+                    <th th:text="#{forum.createdBy}">Skapad av</th>
+                    <th th:text="#{forum.title}">Titel</th>
+                    <th th:text="#{forum.exhibition}">Utställning</th>
+                    <th th:text="#{forum.dateTime}">Skapad</th>
                 </tr>
             </thead>
             <tbody>

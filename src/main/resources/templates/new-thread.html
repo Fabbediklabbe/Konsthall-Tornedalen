@@ -16,25 +16,25 @@
         <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
         <main class="forum-container">
-            <h1>Skapa ny tråd</h1>
+            <h1 th:text="#{forum.createThread}">Skapa ny tråd</h1>
 
             <form method="post" action="/forum/new">
-                <label for="title">Titel:</label>
+                <label for="title" th:text="#{forum.title}">Titel:</label>
                 <input type="text" name="title" id="title" required>
 
-                <label for="content">Beskrivning av Tråden:</label>
+                <label for="content" th:text="#{forum.threadDescription}">Beskrivning av Tråden:</label>
                 <textarea name="content" id="content" required></textarea>
 
-                <label for="exhibitionID">Utställning:</label>
+                <label for="exhibitionID" th:text="#{forum.exhibition}">Utställning:</label>
                 <select name="exhibitionID" id="exhibitionID" required>
-                    <option value="" disabled selected>Välj en utställning</option>
+                    <option th:text="#{forum.exhibitionSelector}" value="" disabled selected>Välj en utställning</option>
                     <option th:each="exhibition : ${exhibitions}"
                             th:value="${exhibition.exhibitionID}"
                             th:text="${exhibition.name}">
                     </option>
                 </select>
 
-                <button type="submit">Publicera</button>
+                <button type="submit" th:text="#{forum.postThread}">Publicera</button>
             </form>
         </main>
 
