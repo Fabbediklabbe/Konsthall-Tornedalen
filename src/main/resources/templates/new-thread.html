@@ -13,12 +13,7 @@
             <a href="/home"><img src="../images/logo.png" alt="Logo" class="logo"></a>
         </header>
 
-        <nav class="menu">
-            <a href="/exhibitions" class="menu-button">Utställningar</a>
-            <a href="/forum" class="menu-button">Forum</a>
-            <a href="/mypages" class="menu-button">Mina sidor</a>
-            <a href="/logout" class="menu-button logout-button">Logga ut</a>
-        </nav>
+        <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
         <main class="forum-container">
             <h1>Skapa ny tråd</h1>

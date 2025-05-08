@@ -15,12 +15,7 @@
             </a>
         </header>
 
-        <nav class="menu">
-            <a href="/exhibitions" class="menu-button" th:text="#{home.exhibitions}">Utställningar</a>
-            <a href="/forum" class="menu-button" th:text="#{home.forum}">Forum</a>
-            <a href="/mypages" class="menu-button" th:text="#{home.myPages}">Mina Sidor</a>
-            <a href="/logout" class="menu-button logout-button" th:text="#{signOut}">Logga ut</a>
-        </nav>
+        <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
         <main class="thread-container" th:attr="data-thread-id=${thread.threadID}">
             <div id="exhibition-info" style="float: right; width: 250px; margin-left: 20px;"></div>
