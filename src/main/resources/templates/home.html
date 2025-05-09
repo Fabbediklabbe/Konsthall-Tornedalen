@@ -1,61 +1,70 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konsthall Tornedalen</title>
-    <link rel="stylesheet" href="../css/home.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Konsthall Tornedalen</title>
+        <link rel="stylesheet" href="../css/home.css">
+    </head>
 
-<body>
+    <body>
 
-<!-- Bakgrundsöverlägg -->
-<div class="background-overlay"></div>
+        <!-- Bakgrundsöverlägg -->
+        <div class="background-overlay"></div>
 
-<!-- LOGOTYP -->
-<header class="header-logo">
-    <a href="home">
-        <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
-    </a>
-</header>
+        <!-- LOGOTYP -->
+        <header class="header-logo">
+            <a href="home">
+                <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
+            </a>
+        </header>
 
-<!-- MENY MED KNAPPAR -->
-<div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
-
-
-<!-- INTROTEXT -->
-<section class="intro-text">
-    <div class="intro-content">
-        <h2 th:text="#{home.intro.header}">Välkommen till Konsthall Tornedalen</h2>
-        <p th:text="#{home.intro.p1}">Det här är en interaktiv webbapplikation för Konsthall Tornedalen.</p>
-        <p th:text="#{home.intro.p2}">I denna webbapplikation kan du se vilken utställning som är aktuell just nu och även titta tillbaka på tidigare utställningar.</p>
-        <p th:text="#{home.intro.p3}">Du kan också interagera med andra konstälskare i vårt forum - skriv kommentarer och dela dina tankar om utställningarna!</p>
-
-    </div>
-</section>
-
-<!-- BILDSPPEL -->
-<section class="slideshow-container">
-    <div class="slide fade active"><img src="/images/skolbarn.png" alt="Skolbarn"></div>
-    <div class="slide fade"><img src="/images/samer.png" alt="Samer"></div>
-    <div class="slide fade"><img src="/images/torneälv.png" alt="Torneälv"></div>
-    <div class="slide fade"><img src="/images/tornedalennorrsken.png" alt="Tornedalen"></div>
-
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</section>
+        <!-- MENY MED KNAPPAR -->
+        <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
 
-<!-- Prickar längst ner -->
-<div class="dots-container">
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-    <span class="dot" onclick="currentSlide(4)"></span>
-</div>
+        <!-- INTROTEXT -->
+        <section class="intro-text">
+            <div class="intro-content">
+                <h2 th:text="#{home.intro.header}">Välkommen till Konsthall Tornedalen</h2>
+                <p th:text="#{home.intro.p1}">Det här är en interaktiv webbapplikation för Konsthall Tornedalen.</p>
+                <p th:text="#{home.intro.p2}">I denna webbapplikation kan du se vilken utställning som är aktuell just nu och även titta tillbaka på tidigare utställningar.</p>
+                <p th:text="#{home.intro.p3}">Du kan också interagera med andra konstälskare i vårt forum - skriv kommentarer och dela dina tankar om utställningarna!</p>
 
-<!-- Extern JavaScript för bildspelet -->
-<script src="../scripts/slideshow.js"></script>
+            </div>
+        </section>
 
-</body>
+        <!-- BILDSPPEL -->
+        <section class="slideshow-container">
+            <div class="slide fade active"><img src="/images/skolbarn.png" alt="Skolbarn"></div>
+            <div class="slide fade"><img src="/images/samer.png" alt="Samer"></div>
+            <div class="slide fade"><img src="/images/torneälv.png" alt="Torneälv"></div>
+            <div class="slide fade"><img src="/images/tornedalennorrsken.png" alt="Tornedalen"></div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </section>
+
+
+        <!-- Prickar längst ner -->
+        <div class="dots-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+
+        <div class="intro-text">
+            <footer>
+                <strong><p th:text="#{openHours}"></p></strong>
+                <p th:text="#{openHoursWeekday}"></p>
+                <p th:text="#{openHoursSaturday}"></p>
+                <p th:text="#{openHoursSunday}"></p>
+            </footer>
+        </div>
+
+        <!-- Extern JavaScript för bildspelet -->
+        <script src="../scripts/slideshow.js"></script>
+
+    </body>
 </html>
