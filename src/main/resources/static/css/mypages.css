@@ -1,83 +1,4 @@
-/* Grundinställningar */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: url('../images/byggnad.png') no-repeat center bottom;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: #fff;
-  position: relative;
-}
-
-/* HELTäckande vit blur */
-.background-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.4); /* Lätt vit ton */
-  backdrop-filter: blur(4px); /* Lite suddighet */
-  pointer-events: none; /* Tillåt klick genom overlayn */
-  z-index: 1;
-}
-
-/* Logotypsektionen */
-.header-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 2;
-}
-
-/* Själva logotypen */
-.logo {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  display: block;
-}
-
-/* Menyraden */
-.menu {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 5px;
-  padding: 5px 0;
-  position: relative;
-  z-index: 2;
-}
-
-/* Menyknappar */
-.menu-button {
-  background-color: #FFD836;
-  border: none;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 16px;
-  color: black;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: background-color 0.3s;
-  text-decoration: none;
-}
-
-/* Hover-effekt */
-.menu-button:hover {
-  background-color: #e6bd00;
-}
-
-/* Logga ut-knappen */
-.logout-button {
-  display: inline-block;
-  text-align: center;
-}
+/* mypages_clean.css – innehåller endast specifik stil för mina sidor */
 
 .mypage-container {
   position: relative;
@@ -89,21 +10,17 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-
 .user-info, .user-comments {
   margin-bottom: 30px;
 }
-
 .user-info h2, .user-comments h2 {
   margin-bottom: 10px;
   color: #333;
 }
-
 .user-comments ul {
   list-style-type: none;
   padding: 0;
 }
-
 .user-comments li {
   padding: 10px 0;
   border-bottom: 1px solid #ccc;
