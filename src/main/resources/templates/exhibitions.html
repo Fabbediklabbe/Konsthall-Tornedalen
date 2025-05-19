@@ -24,12 +24,12 @@
 <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
 
-<h1>Aktuella Utställningar</h1>
+<h1 th:text="#{exhibitions.currentExhibitions}">Aktuella Utställningar</h1>
 <div id="active-exhibitions-container" class="exhibitions-container">
     <!-- Här lägger vi aktiva utställningar -->
 </div>
 
-<h1>Tidigare Utställningar</h1>
+<h1 th:text="#{exhibitions.earlierExhibitions}">Tidigare Utställningar</h1>
 <div id="previous-exhibitions-container" class="exhibitions-container">
     <!-- Här lägger vi gamla utställningar -->
 </div>
