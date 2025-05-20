@@ -1,4 +1,3 @@
-// Vänta tills hela HTML sidan har laddats
 document.addEventListener("DOMContentLoaded", () => {
 
   //Hämta trådens ID från attributet data-thread-id på <main>-elementet

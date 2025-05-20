@@ -19,7 +19,7 @@ public class LocaleConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
-        slr.setDefaultLocale(Locale.ENGLISH); // eller Locale("sv")
+        slr.setDefaultLocale(Locale.ENGLISH);
         return slr;
     }
 
@@ -38,7 +38,7 @@ public class LocaleConfig implements WebMvcConfigurer {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages"); // "messages" = messages.properties
+        messageSource.setBasename("messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

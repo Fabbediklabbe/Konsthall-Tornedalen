@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konsthall Tornedalen</title>
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/forum.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Konsthall Tornedalen</title>
+        <link rel="stylesheet" href="../css/base.css">
+        <link rel="stylesheet" href="../css/forum.css">
+    </head>
 
-<body>
+    <body>
 
-    <!-- Bakgrundsöverlägg -->
-    <div class="background-overlay"></div>
+        <div class="background-overlay"></div>
 
-    <!-- LOGOTYP -->
-    <header class="header-logo">
-        <a href="/home">
-            <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
-        </a>
-    </header>
+        <header class="header-logo">
+            <a href="/home">
+                <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
+            </a>
+        </header>
 
-    <!-- MENY MED KNAPPAR -->
-    <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
+        <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
 
-    <!-- Forum-inlägg -->
-    <div class="forum-container">
-        <h1 th:text="#{forum.header}">Forumtrådar</h1>
+        <!-- Forum-inlägg -->
+        <div class="forum-container">
+            <h1 th:text="#{forum.header}">Forumtrådar</h1>
 
-        <div class="new-thread-button-container">
-            <a href="/forum/new" class="menu-button" th:text="#{forum.createThread}">Skapa ny tråd</a>
-        </div>        
+            <div class="new-thread-button-container">
+                <a href="/forum/new" class="menu-button" th:text="#{forum.createThread}">Skapa ny tråd</a>
+            </div>        
 
-        <table class="thread-table">
-            <thead>
-                <tr>
-                    <th th:text="#{forum.createdBy}">Skapad av</th>
-                    <th th:text="#{forum.title}">Titel</th>
-                    <th th:text="#{forum.exhibition}">Utställning</th>
-                    <th th:text="#{forum.dateTime}">Skapad</th>
+            <table class="thread-table">
+                <thead>
+                    <tr>
+                        <th th:text="#{forum.createdBy}">Skapad av</th>
+                        <th th:text="#{forum.title}">Titel</th>
+                        <th th:text="#{forum.exhibition}">Utställning</th>
+                        <th th:text="#{forum.dateTime}">Skapad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="thread : ${threads}"
+                    th:onclick="|window.location='/forum/${thread.threadID}'|"
+                    class="clickable-row">
+                    <td th:text="${thread.userFirstName + ' ' + thread.userLastName}">Förnamn Efternamn</td>
+                    <td th:text="${thread.title}">Trådtitel</td>
+                    <td th:text="${thread.exhibitionName}">Utställning</td>
+                    <td th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</td>
                 </tr>
-            </thead>
-            <tbody>
-            <tr th:each="thread : ${threads}"
-                th:onclick="|window.location='/forum/${thread.threadID}'|"
-                class="clickable-row">
-                <td th:text="${thread.userFirstName + ' ' + thread.userLastName}">Förnamn Efternamn</td>
-                <td th:text="${thread.title}">Trådtitel</td>
-                <td th:text="${thread.exhibitionName}">Utställning</td>
-                <td th:text="${#temporals.format(thread.createdAt, 'yyyy-MM-dd HH:mm')}">Datum</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
 
-</body>
+    </body>
 </html>

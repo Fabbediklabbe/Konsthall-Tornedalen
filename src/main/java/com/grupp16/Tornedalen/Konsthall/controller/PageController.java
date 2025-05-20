@@ -89,7 +89,7 @@ public class PageController {
             User user = sql.getUserByEmail(principal.getName());
             sql.saveComment(user.getUserID(), threadID, comment);
         } catch (Exception e) {
-            e.printStackTrace(); // byt gärna ut mot logger
+            e.printStackTrace();
         }
         return "redirect:/forum/" + threadID;
     }

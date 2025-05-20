@@ -1,6 +1,6 @@
 // JavaScript för Bildspel
 
-//Håller koll på vilken vild som visas
+//Håller koll på vilken bild som visas
 let slideIndex = 0;
 //Variabler för bilderna, prickarna och timer-intervallet
 let slides, dots, timer;

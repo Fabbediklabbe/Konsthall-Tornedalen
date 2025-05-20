@@ -9,20 +9,17 @@
 </head>
 <body>
 
-<!-- Wrapper to centralize content -->
 <div class="login-container">
 
-    <!-- Tornedalen Konsthall Logo -->
     <img src="../images/logo.png" alt="Tornedalen logo" class="logo">
 
-    <!-- Form to Login -->
+    <!-- Login form -->
     <form class="login-form" method="post" action="/login">
         <input type="text" name="username" placeholder="Email" required>
         <input type="password" name="password" th:placeholder="#{password}" required>
         <button type="submit" th:text="#{login.button}">Logga in</button>
     </form>
 
-    <!-- Link to Registration -->
     <div class="bottom-text">
         <span th:text="#{login.createAccount}">Har du inget konto?</span><br>
         <a href="/" class="register-link" th:text="#{login.registerLink}">Skapa konto här!</a>

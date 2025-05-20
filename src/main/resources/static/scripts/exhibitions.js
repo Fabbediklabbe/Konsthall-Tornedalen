@@ -1,4 +1,3 @@
-// När sidan är färdigladdad, kör detta
 document.addEventListener("DOMContentLoaded", function () {
     // Hämta data från backend
     fetch('/api/exhibitions/all')

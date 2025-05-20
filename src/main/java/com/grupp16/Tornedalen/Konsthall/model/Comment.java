@@ -26,7 +26,7 @@ public class Comment {
         return createdAt;
     }
 
-    // Setters (valfritt om du inte behöver dem)
+    // Setters
     public void setUserName(String userName) {
         this.userName = userName;
     }

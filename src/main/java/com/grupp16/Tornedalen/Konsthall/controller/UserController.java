@@ -39,6 +39,7 @@ public class UserController {
         return ResponseEntity.badRequest().body("Error: " + e.getMessage());
     }
 }
+
 //Metod för att hantera GET-förfrågningar till /api/users/info
 @GetMapping("/info")
     public ResponseEntity<?> getUserInfo(Authentication authentication)

@@ -86,7 +86,7 @@ public class SQL {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace(); // eller logga snyggare
+            e.printStackTrace();
         }
 
         return exhibitions;
@@ -151,7 +151,7 @@ public class SQL {
             }
     
         } catch (SQLException e) {
-            e.printStackTrace(); // byt ut mot logger om du vill
+            e.printStackTrace();
         }
     
         return threads;

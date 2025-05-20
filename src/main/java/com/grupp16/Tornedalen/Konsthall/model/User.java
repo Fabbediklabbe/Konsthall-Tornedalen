@@ -2,10 +2,6 @@ package com.grupp16.Tornedalen.Konsthall.model;
 
 import java.io.Serializable;
 
-/**
- * This class represents a User and is matching the fields that are to be sent from register.html
- */
-
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,7 +34,6 @@ public class User implements Serializable {
     }
  
     // Setters
-
     public void setUserID(int userID) {
         this.userID = userID;
     }
@@ -59,7 +54,4 @@ public class User implements Serializable {
     {
         this.password = password;
     }
- 
- 
- 
 }

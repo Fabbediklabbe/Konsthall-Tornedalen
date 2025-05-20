@@ -1,15 +1,13 @@
-
-// Vänta tills hela sidan är laddad innan JS körs
 document.addEventListener("DOMContentLoaded", () =>
 {
     // SKicka en GET-förfrågan till backend för att hämta informationen om den inloggade användaren
     fetch("/api/users/info")
         .then(response =>
         {
-        // Kontrollerar om svaret är OK (HTTP 200)
+        // Kontrollerar om svaret är OK
             if (!response.ok)
             {
-                // Om inte, kasta ett fel så det fångas i catch-blocket
+                // Om inte, kasta ett fel
                 throw new Error("Kunde inte hämta användarinformation");
             }
             // Om allt är OK returnera svaret som JSON
@@ -19,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () =>
         .then(data =>
         {
         // Använd datan från svaret för att fylla i HTML-elementet på sidan
-
             // Fyll i HTML-elementen med användarens data
             document.getElementById("firstName").textContent = data.name;
             document.getElementById("lastName").textContent = data.lastName;

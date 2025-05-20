@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="#{register.title}">Registrera – Tornedalen</title>
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="#{register.title}">Registrera – Tornedalen</title>
 
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/login.css">
-</head>
-<body>
+        <link rel="stylesheet" href="../css/base.css">
+        <link rel="stylesheet" href="../css/login.css">
+    </head>
+    <body>
 
-<!-- Wrapper to centralize content (Uses the same layout as login page) -->
-<div class="login-container">
+        <div class="login-container">
 
-    <!-- Tornedalen Kosthall logo -->
-    <img src="../images/logo.png" alt="Tornedalen logo" class="logo">
+            <img src="../images/logo.png" alt="Tornedalen logo" class="logo">
 
-    <!-- User instructions -->
-    <h2 th:text="#{register.header}">Välkommen!</h2>
-    <p th:text="#{register.instructions}">Fyll i dina uppgifter nedan</p>
+            <h2 th:text="#{register.header}">Välkommen!</h2>
+            <p th:text="#{register.instructions}">Fyll i dina uppgifter nedan</p>
 
-    <!-- Form to create a new account -->
-    <form class="login-form" id="registerForm">
-        <input type="text" name="name" th:placeholder="#{firstname}" required>
-        <input type="text" name="lastName" th:placeholder="#{surname}" required>
-        <!-- Forces the userinput to include "@" -->
-        <input type="email" name="email" placeholder="Email" required>
-        <!-- Makes the password input to be replaced with "*" -->
-        <input type="password" name="password" th:placeholder="#{password}" required>
-        <button type="submit" th:text="#{register.button}">Skapa Användare</button>
-    </form>
+            <!-- Form to create a new account -->
+            <form class="login-form" id="registerForm">
+                <input type="text" name="name" th:placeholder="#{firstname}" required>
+                <input type="text" name="lastName" th:placeholder="#{surname}" required>
+                <!-- Forces the userinput to include "@" -->
+                <input type="email" name="email" placeholder="Email" required>
+                <!-- Makes the password input to be replaced with "*" -->
+                <input type="password" name="password" th:placeholder="#{password}" required>
+                <button type="submit" th:text="#{register.button}">Skapa Användare</button>
+            </form>
 
-    <!-- Link back to the login page -->
-    <div class="bottom-text">
-        <span th:text="#{register.alreadyHaveAccount}">Har du redan ett konto?</span><br>
-        <a href="/login" class="register-link" th:text="#{register.loginHere}">Logga in här!</a>
-    </div>
+            <div class="bottom-text">
+                <span th:text="#{register.alreadyHaveAccount}">Har du redan ett konto?</span><br>
+                <a href="/login" class="register-link" th:text="#{register.loginHere}">Logga in här!</a>
+            </div>
 
-    <!-- Språkval -->
-    <div th:replace="~{fragments/language-selector :: languageSelector}"></div>
-</div>
+            <!-- Språkval -->
+            <div th:replace="~{fragments/language-selector :: languageSelector}"></div>
+        </div>
 
 
-<script src="../scripts/register.js"></script>
-</body>
+        <script src="../scripts/register.js"></script>
+    </body>
 </html>

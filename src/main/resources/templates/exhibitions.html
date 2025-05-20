@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konsthall Tornedalen</title>
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/exhibitions.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Konsthall Tornedalen</title>
+        <link rel="stylesheet" href="../css/base.css">
+        <link rel="stylesheet" href="../css/exhibitions.css">
+    </head>
 
-<body>
+    <body>
 
-<!-- Bakgrundsöverlägg -->
-<div class="background-overlay"></div>
+        <div class="background-overlay"></div>
 
-<!-- LOGOTYP -->
-<header class="header-logo">
-    <a href="/home">
-        <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
-    </a>
-</header>
+        <header class="header-logo">
+            <a href="/home">
+                <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
+            </a>
+        </header>
 
-<!-- MENY MED KNAPPAR -->
-<div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
+        <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
 
-<h1 th:text="#{exhibitions.currentExhibitions}">Aktuella Utställningar</h1>
-<div id="active-exhibitions-container" class="exhibitions-container">
-    <!-- Här lägger vi aktiva utställningar -->
-</div>
+        <h1 th:text="#{exhibitions.currentExhibitions}">Aktuella Utställningar</h1>
+        <div id="active-exhibitions-container" class="exhibitions-container">
+            <!-- Här lägger vi aktiva utställningar -->
+        </div>
 
-<h1 th:text="#{exhibitions.earlierExhibitions}">Tidigare Utställningar</h1>
-<div id="previous-exhibitions-container" class="exhibitions-container">
-    <!-- Här lägger vi gamla utställningar -->
-</div>
+        <h1 th:text="#{exhibitions.earlierExhibitions}">Tidigare Utställningar</h1>
+        <div id="previous-exhibitions-container" class="exhibitions-container">
+            <!-- Här lägger vi gamla utställningar -->
+        </div>
 
-<script src="../scripts/exhibitions.js"></script>
+        <script src="../scripts/exhibitions.js"></script>
 
-</body>
+    </body>
 </html>

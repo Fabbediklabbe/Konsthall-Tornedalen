@@ -9,11 +9,8 @@
     </head>
 
     <body>
-
-        <!-- Bakgrundsöverlägg -->
         <div class="background-overlay"></div>
 
-        <!-- LOGOTYP -->
         <header class="header-logo">
             <a href="home">
                 <img src="../images/logo.png" alt="Konsthall Tornedalen Logotyp" class="logo">
@@ -23,8 +20,6 @@
         <!-- MENY MED KNAPPAR -->
         <div th:replace="~{fragments/menu-buttons :: menuButtons}"></div>
 
-
-        <!-- INTROTEXT -->
         <section class="intro-text">
             <div class="intro-content">
                 <h2 th:text="#{home.intro.header}">Välkommen till Konsthall Tornedalen</h2>
@@ -35,7 +30,7 @@
             </div>
         </section>
 
-        <!-- BILDSPPEL -->
+        <!-- BILDSPEL -->
         <section class="slideshow-container">
             <div class="slide fade active"><img src="/images/skolbarn.png" alt="Skolbarn"></div>
             <div class="slide fade"><img src="/images/samer.png" alt="Samer"></div>
@@ -45,7 +40,6 @@
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </section>
-
 
         <!-- Prickar längst ner -->
         <div class="dots-container">
@@ -64,7 +58,6 @@
             </footer>
         </div>
 
-        <!-- Extern JavaScript för bildspelet -->
         <script src="../scripts/slideshow.js"></script>
 
     </body>
